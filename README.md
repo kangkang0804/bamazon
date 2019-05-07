@@ -8,7 +8,7 @@
 - > inquirer
 - > mysql
 
-#### --Inside bamazonCustomer.js--
+#### --Inside `bamazonCustomer.js`--
 
 Users are initially welcomed to the Bamazon Store Application!
 
