@@ -12,6 +12,6 @@
 
 Users are initially welcomed to the Bamazon Store Application!
 
-They are kindly then asked how they would like to proceed - do they wish to see all products in our assortment? Or do they wish to view our store by department? Once they decide it's time to begin shopping..
+They are kindly then asked how they wish to proceed - do they wish to see all products in our assortment? Or do they want a view by department? Once they decide, it's time to begin shopping..
 
 ![](images/createCart.png)
