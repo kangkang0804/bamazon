@@ -28,7 +28,7 @@ var start = function () {
             choices: ["Visit Assortment", "View Low Inventory", "Add to Inventory", "Add to Assortment", "Exit"]
         }).then(function (answers) {
             switch (answers.action) {
-                case "View Products for Sale":
+                case "Visit Assortment":
                     viewProduct();
                     break;
 
@@ -41,7 +41,7 @@ var start = function () {
                     addInventory();
                     break;
 
-                case "Add New Product":
+                case "Add to Assortment":
                     addProduct();
                     break;
 
@@ -69,6 +69,7 @@ function viewProduct() {
             );
         }
         console.log(table.toString());
+        start();
     })
 };
 // Read all products with stock levels below 5
@@ -89,6 +90,7 @@ function atRiskLevels() {
             );
         }
         console.log(table.toString());
+        start();
     })
 };
 // update inventory levels
@@ -127,7 +129,8 @@ function addInventory() {
                 connection.query("UPDATE products SET ? WHERE ?", [{ StockQuantity: selectedItem[0].StockQuantity + quantity }, { Id: product }],
                     function (err, update) {
                         if (err) throw err;
-                        console.log(update)
+                        console.log(update.affectedRows + " items updated");
+                        start();
                     });
             })
         })
@@ -151,7 +154,7 @@ var newProductQuestions = [
         message: "Price: ",
         validate: function (value) {
             var valid = !isNaN(parseFloat(value));
-            return valid.toFixed(2) || "Please enter a number";
+            return valid || "Please enter a number";
         },
         filter: Number
     },
@@ -186,10 +189,16 @@ function addProduct() {
             let stockQuantity = newItem.StockQuantity;
             let category = newItem.Category;
             let description = newItem.ItemDesc;
-            connection.query("INSERT INTO products (ProductName, DepartmentName, Price, StockQuantity, Category, ItemDesc) VALUES ?", {
-                productName, department, price, stockQuantity, category, description
+            connection.query("INSERT INTO products SET ?",{
+                ProductName: productName,
+                DepartmentName: department,
+                Price: price,
+                StockQuantity: stockQuantity,
+                Category: category,
+                ItemDesc: description
             }, function(err, res){
-                console.log(res);
+                console.log(res.affectedRows + " product inserted!")
+                start();
             })
         })
 };
