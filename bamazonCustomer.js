@@ -7,7 +7,7 @@ var connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "*******",
+    password: "Thanos23",
     database: "bamazon"
 });
 
@@ -19,7 +19,7 @@ connection.connect(function (err) {
 })
 
 // initialize store app
-function start() {
+var start = function () {
     inquirer
         .prompt({
             name: "action",
